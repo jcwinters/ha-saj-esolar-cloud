@@ -1,6 +1,7 @@
 """SAJ eSolar sensor platform."""
 from __future__ import annotations
 from datetime import datetime
+import zoneinfo
 
 from typing import Any, cast
 
@@ -22,6 +23,7 @@ from homeassistant.helpers.typing import StateType
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
 )
+from homeassistant.util import dt as dt_util
 
 from .const import DEVICE_INFO, DIRECTION_STATES, DOMAIN, H1_SENSORS
 from .coordinator import SAJeSolarDataUpdateCoordinator
@@ -116,9 +118,10 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
             ]:
                 return float(data["plant_details"]["plantDetail"][self._sensor_key])
             elif self._sensor_key == "lastUploadTime":
-                # Parse the timestamp string to datetime object
+                # Parse the timestamp string to datetime object with timezone
                 timestamp = data["plant_details"]["plantDetail"]["lastUploadTime"]
-                return datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S").isoformat()
+                naive_dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
+                return dt_util.as_utc(naive_dt)
             elif self._sensor_key == "selfUseRate":
                 # Remove % symbol and convert to float
                 value = data["plant_details"]["plantDetail"]["selfUseRate"]
