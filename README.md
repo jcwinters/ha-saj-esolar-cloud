@@ -2,6 +2,8 @@
 
 A Home Assistant integration for SAJ eSolar cloud service, focused on H1 inverters with battery storage.
 
+This integration is a complete rewrite focused on H1 inverters with battery storage, using the cloud API. The "Air" suffix denotes its cloud-based nature and distinguishes it from other SAJ eSolar integrations.
+
 ## Features
 
 - Configuration through Home Assistant UI
@@ -39,7 +41,7 @@ A Home Assistant integration for SAJ eSolar cloud service, focused on H1 inverte
 2. Click the "+ Add Integration" button
 3. Search for "SAJ eSolar Air"
 4. Enter your eSolar Portal credentials:
-   - Username (email)
+   - Username
    - Password
 
 The integration will automatically discover your H1 inverter and set up all available sensors.
@@ -83,8 +85,9 @@ The integration will automatically discover your H1 inverter and set up all avai
 
 ## Support
 
-For bugs, feature requests, and support:
-- [Open an issue on GitHub](https://github.com/elboletaire/saj_esolar_air/issues)
+For bugs [open an issue on GitHub](https://github.com/elboletaire/saj_esolar_air/issues).
+
+Please, abstain from questions and feature requests, since this is a personal project and I don't have the time to provide support for it.
 
 ## Credits
 

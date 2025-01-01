@@ -3,7 +3,7 @@
         "step": {
             "user": {
                 "title": "SAJ eSolar Air",
-                "description": "Set up SAJ eSolar Air integration. You need your eSolar Portal credentials.",
+                "description": "Set up SAJ eSolar integration. You need your eSolar Portal credentials.",
                 "data": {
                     "username": "Username",
                     "password": "Password"
