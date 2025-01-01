@@ -1,0 +1,15 @@
+{
+  "domain": "saj_esolar",
+  "name": "SAJ eSolar",
+  "version": "2.0.0",
+  "config_flow": true,
+  "documentation": "https://github.com/djansen1987/SAJeSolar/",
+  "issue_tracker": "https://github.com/djansen1987/SAJeSolar/issues",
+  "requirements": [
+    "aiohttp>=3.8.0",
+    "async_timeout>=4.0.0"
+  ],
+  "dependencies": [],
+  "codeowners": ["@djansen1987"],
+  "iot_class": "cloud_polling"
+}

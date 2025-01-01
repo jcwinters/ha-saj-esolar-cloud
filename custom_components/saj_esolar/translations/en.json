@@ -1,0 +1,59 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "SAJ eSolar",
+                "description": "Set up SAJ eSolar integration. You need your eSolar Portal credentials.",
+                "data": {
+                    "username": "Username",
+                    "password": "Password"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Failed to connect to the SAJ eSolar API",
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error"
+        },
+        "abort": {
+            "already_configured": "Account is already configured"
+        }
+    },
+    "entity": {
+        "sensor": {
+            "nowPower": {
+                "name": "Current Power"
+            },
+            "todayElectricity": {
+                "name": "Today's Generation"
+            },
+            "totalElectricity": {
+                "name": "Total Generation"
+            },
+            "batEnergyPercent": {
+                "name": "Battery Level"
+            },
+            "batteryPower": {
+                "name": "Battery Power"
+            },
+            "gridPower": {
+                "name": "Grid Power"
+            },
+            "totalBuyElec": {
+                "name": "Total Grid Import"
+            },
+            "totalSellElec": {
+                "name": "Total Grid Export"
+            },
+            "chargeElec": {
+                "name": "Total Battery Charge"
+            },
+            "dischargeElec": {
+                "name": "Total Battery Discharge"
+            },
+            "h1Online": {
+                "name": "Device Online"
+            }
+        }
+    }
+}
