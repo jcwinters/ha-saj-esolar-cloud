@@ -1,8 +1,8 @@
-# SAJ eSolar Air Integration for Home Assistant
+# SAJ eSolar Cloud Integration for Home Assistant
 
 A Home Assistant integration for SAJ eSolar cloud service, focused on H1 inverters with battery storage.
 
-This integration is a complete rewrite focused on H1 inverters with battery storage, using the cloud API. The "Air" suffix denotes its cloud-based nature and distinguishes it from other SAJ eSolar integrations.
+This integration is a complete rewrite focused on H1 inverters with battery storage, using the cloud API. The "Cloud" suffix denotes its cloud-based nature and distinguishes it from other SAJ eSolar integrations.
 
 ## Features
 
@@ -24,22 +24,22 @@ This integration is a complete rewrite focused on H1 inverters with battery stor
 2. Go to "Integrations"
 3. Click the three dots menu in the top right corner
 4. Select "Custom repositories"
-5. Add this repository URL: `https://github.com/elboletaire/ha-saj-esolar-air`
+5. Add this repository URL: `https://github.com/elboletaire/ha-saj-esolar-cloud`
 6. Select category: "Integration"
 7. Click "Add"
-8. Find "SAJ eSolar Air" in the integrations list and install it
+8. Find "SAJ eSolar Cloud" in the integrations list and install it
 9. Restart Home Assistant
 
 ### Manual Installation
 
-1. Copy the `custom_components/saj_esolar_air` directory to your Home Assistant's `custom_components` directory
+1. Copy the `custom_components/saj_esolar_cloud` directory to your Home Assistant's `custom_components` directory
 2. Restart Home Assistant
 
 ## Configuration
 
 1. Go to Home Assistant's Configuration > Integrations
 2. Click the "+ Add Integration" button
-3. Search for "SAJ eSolar Air"
+3. Search for "SAJ eSolar Cloud"
 4. Enter your eSolar Portal credentials:
    - Username
    - Password
@@ -85,7 +85,7 @@ The integration will automatically discover your H1 inverter and set up all avai
 
 ## Support
 
-For bugs [open an issue on GitHub](https://github.com/elboletaire/ha-saj-esolar-air/issues).
+For bugs [open an issue on GitHub](https://github.com/elboletaire/ha-saj-esolar-cloud/issues).
 
 Please, abstain from questions and feature requests, since this is a personal project and I don't have the time to provide support for it.
 

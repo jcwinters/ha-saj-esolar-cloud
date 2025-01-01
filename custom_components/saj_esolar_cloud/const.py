@@ -1,7 +1,7 @@
-"""Constants for the SAJ eSolar Air integration."""
+"""Constants for the SAJ eSolar Cloud integration."""
 from typing import Final
 
-DOMAIN: Final = "saj_esolar_air"
+DOMAIN: Final = "saj_esolar_cloud"
 MANUFACTURER: Final = "SAJ"
 MODEL: Final = "H1"
 
