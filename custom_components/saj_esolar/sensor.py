@@ -22,7 +22,7 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
 )
 
-from .const import DEVICE_INFO, DOMAIN, H1_SENSORS
+from .const import DEVICE_INFO, DIRECTION_STATES, DOMAIN, H1_SENSORS
 from .coordinator import SAJeSolarDataUpdateCoordinator
 
 async def async_setup_entry(
@@ -81,6 +81,8 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
         elif sensor_config["device_class"] == "battery":
             self._attr_device_class = SensorDeviceClass.BATTERY
             self._attr_native_unit_of_measurement = PERCENTAGE
+        elif sensor_config["device_class"] == "timestamp":
+            self._attr_device_class = SensorDeviceClass.TIMESTAMP
         elif sensor_config["unit"]:
             self._attr_native_unit_of_measurement = sensor_config["unit"]
 
@@ -98,24 +100,39 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
         try:
             data = self.coordinator.data
 
-            # Map sensor keys to their data locations
-            if self._sensor_key in ["nowPower", "todayElectricity", "totalElectricity"]:
-                return float(data["plant_details"]["plantDetail"][self._sensor_key])
-            elif self._sensor_key in ["batEnergyPercent", "batteryPower", "gridPower", "h1Online"]:
-                value = data["device_power"]["storeDevicePower"][self._sensor_key]
-                if self._sensor_key == "h1Online":
-                    return "Yes" if int(value) else "No"
-                return float(value)
-            elif self._sensor_key in ["totalBuyElec", "totalSellElec", "chargeElec", "dischargeElec"]:
-                return float(data["plant_details"]["plantDetail"][self._sensor_key])
-            elif self._sensor_key == "totalPlantTreeNum":
-                # Get trees planted from chart data
-                if "viewBean" in data["chart_data"]:
-                    return float(data["chart_data"]["viewBean"]["totalPlantTreeNum"])
-            elif self._sensor_key == "totalReduceCo2":
-                # Get CO2 reduction from chart data
-                if "viewBean" in data["chart_data"]:
-                    return float(data["chart_data"]["viewBean"]["totalReduceCo2"])
+            # Plant Detail Sensors
+            if self._sensor_key in [
+                "nowPower", "todayElectricity", "monthElectricity",
+                "yearElectricity", "totalElectricity", "totalConsumpElec",
+                "totalBuyElec", "totalSellElec", "totalPlantTreeNum",
+                "totalReduceCo2", "lastUploadTime"
+            ]:
+                value = data["plant_details"]["plantDetail"][self._sensor_key]
+                if self._sensor_key == "selfUseRate":
+                    # Remove % symbol and convert to float
+                    return float(value.rstrip("%"))
+                return value
+
+            # Device Power Sensors
+            elif self._sensor_key in [
+                "pvPower", "gridPower", "batteryPower", "outPower",
+                "totalLoadPower", "batCurr", "batEnergyPercent",
+                "batCapcity"
+            ]:
+                return float(data["device_power"]["storeDevicePower"][self._sensor_key])
+
+            # Direction Sensors
+            elif self._sensor_key in [
+                "pvDirection", "gridDirection", "batteryDirection",
+                "outPutDirection"
+            ]:
+                value = int(data["device_power"]["storeDevicePower"][self._sensor_key])
+                return DIRECTION_STATES.get(value, f"Unknown ({value})")
+
+            # Online Status
+            elif self._sensor_key == "isOnline":
+                value = int(data["device_power"]["storeDevicePower"]["isOnline"])
+                return "Yes" if value else "No"
 
             return None
         except (KeyError, TypeError, ValueError):

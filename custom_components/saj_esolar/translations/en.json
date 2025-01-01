@@ -22,26 +22,22 @@
     "entity": {
         "sensor": {
             "nowPower": {
-                "name": "Current Power",
-                "state": {
-                    "Yes": "Yes",
-                    "No": "No"
-                }
+                "name": "Current Power"
             },
             "todayElectricity": {
                 "name": "Today's Generation"
             },
+            "monthElectricity": {
+                "name": "Month's Generation"
+            },
+            "yearElectricity": {
+                "name": "Year's Generation"
+            },
             "totalElectricity": {
                 "name": "Total Generation"
             },
-            "batEnergyPercent": {
-                "name": "Battery Level"
-            },
-            "batteryPower": {
-                "name": "Battery Power"
-            },
-            "gridPower": {
-                "name": "Grid Power"
+            "totalConsumpElec": {
+                "name": "Total Consumption"
             },
             "totalBuyElec": {
                 "name": "Total Grid Import"
@@ -49,24 +45,80 @@
             "totalSellElec": {
                 "name": "Total Grid Export"
             },
-            "chargeElec": {
-                "name": "Total Battery Charge"
-            },
-            "dischargeElec": {
-                "name": "Total Battery Discharge"
-            },
-            "h1Online": {
-                "name": "Device Online",
-                "state": {
-                    "Yes": "Yes",
-                    "No": "No"
-                }
+            "selfUseRate": {
+                "name": "Self-Use Rate"
             },
             "totalPlantTreeNum": {
                 "name": "Trees Planted"
             },
             "totalReduceCo2": {
                 "name": "CO₂ Reduction"
+            },
+            "lastUploadTime": {
+                "name": "Last Update"
+            },
+            "pvPower": {
+                "name": "PV Power"
+            },
+            "gridPower": {
+                "name": "Grid Power"
+            },
+            "batteryPower": {
+                "name": "Battery Power"
+            },
+            "outPower": {
+                "name": "Output Power"
+            },
+            "totalLoadPower": {
+                "name": "Total Load Power"
+            },
+            "batCurr": {
+                "name": "Battery Current"
+            },
+            "batEnergyPercent": {
+                "name": "Battery Level"
+            },
+            "batCapcity": {
+                "name": "Battery Capacity"
+            },
+            "pvDirection": {
+                "name": "PV Direction",
+                "state": {
+                    "Importing": "Importing",
+                    "Standby": "Standby",
+                    "Exporting": "Exporting"
+                }
+            },
+            "gridDirection": {
+                "name": "Grid Direction",
+                "state": {
+                    "Importing": "Importing",
+                    "Standby": "Standby",
+                    "Exporting": "Exporting"
+                }
+            },
+            "batteryDirection": {
+                "name": "Battery Direction",
+                "state": {
+                    "Importing": "Charging",
+                    "Standby": "Standby",
+                    "Exporting": "Discharging"
+                }
+            },
+            "outPutDirection": {
+                "name": "Output Direction",
+                "state": {
+                    "Importing": "Importing",
+                    "Standby": "Standby",
+                    "Exporting": "Exporting"
+                }
+            },
+            "isOnline": {
+                "name": "Device Online",
+                "state": {
+                    "Yes": "Yes",
+                    "No": "No"
+                }
             }
         }
     }
