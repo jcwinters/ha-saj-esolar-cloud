@@ -106,11 +106,52 @@ class SAJeSolarDataUpdateCoordinator(DataUpdateCoordinator):
                     raise UpdateFailed(f"Failed to get device power info: {resp.status}")
                 device_power = await resp.json()
 
+            # Get plant chart data for historical information
+            today = datetime.now()
+            previous_day = (today - timedelta(days=1)).strftime("%Y-%m-%d")
+            next_day = (today + timedelta(days=1)).strftime("%Y-%m-%d")
+            current_month = today.strftime("%Y-%m")
+            previous_month = (today.replace(day=1) - timedelta(days=1)).strftime("%Y-%m")
+            next_month = (today.replace(day=28) + timedelta(days=4)).strftime("%Y-%m")
+            current_year = today.strftime("%Y")
+            previous_year = str(int(current_year) - 1)
+            next_year = str(int(current_year) + 1)
+
+            chart_url = (
+                f"{BASE_URL}{ENDPOINTS['plant_chart']}?"
+                f"plantuid={plant_uid}&"
+                f"chartDateType=1&"
+                f"energyType=0&"
+                f"clientDate={client_date}&"
+                f"deviceSnArr={device_sn}&"
+                f"chartCountType=2&"
+                f"previousChartDay={previous_day}&"
+                f"nextChartDay={next_day}&"
+                f"chartDay={client_date}&"
+                f"previousChartMonth={previous_month}&"
+                f"nextChartMonth={next_month}&"
+                f"chartMonth={current_month}&"
+                f"previousChartYear={previous_year}&"
+                f"nextChartYear={next_year}&"
+                f"chartYear={current_year}&"
+                f"elecDevicesn={device_sn}&"
+                f"_={epoch_ms}"
+            )
+
+            async with self.session.get(
+                chart_url,
+                headers=headers,
+            ) as resp:
+                if resp.status != 200:
+                    raise UpdateFailed(f"Failed to get plant chart data: {resp.status}")
+                chart_data = await resp.json()
+
             # Combine all data
             data = {
                 "plant_info": plant_info,
                 "plant_details": plant_details,
                 "device_power": device_power,
+                "chart_data": chart_data,
             }
 
             # Logout and clear session

@@ -81,12 +81,16 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
         elif sensor_config["device_class"] == "battery":
             self._attr_device_class = SensorDeviceClass.BATTERY
             self._attr_native_unit_of_measurement = PERCENTAGE
+        elif sensor_config["unit"]:
+            self._attr_native_unit_of_measurement = sensor_config["unit"]
 
         # Set up state class
         if sensor_config["state_class"] == "measurement":
             self._attr_state_class = SensorStateClass.MEASUREMENT
         elif sensor_config["state_class"] == "total_increasing":
             self._attr_state_class = SensorStateClass.TOTAL_INCREASING
+        elif sensor_config["state_class"] == "total":
+            self._attr_state_class = SensorStateClass.TOTAL
 
     @property
     def native_value(self) -> StateType:
@@ -104,6 +108,14 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
                 return float(value)
             elif self._sensor_key in ["totalBuyElec", "totalSellElec", "chargeElec", "dischargeElec"]:
                 return float(data["plant_details"]["plantDetail"][self._sensor_key])
+            elif self._sensor_key == "totalPlantTreeNum":
+                # Get trees planted from chart data
+                if "viewBean" in data["chart_data"]:
+                    return float(data["chart_data"]["viewBean"]["totalPlantTreeNum"])
+            elif self._sensor_key == "totalReduceCo2":
+                # Get CO2 reduction from chart data
+                if "viewBean" in data["chart_data"]:
+                    return float(data["chart_data"]["viewBean"]["totalReduceCo2"])
 
             return None
         except (KeyError, TypeError, ValueError):

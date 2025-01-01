@@ -22,7 +22,11 @@
     "entity": {
         "sensor": {
             "nowPower": {
-                "name": "Current Power"
+                "name": "Current Power",
+                "state": {
+                    "Yes": "Yes",
+                    "No": "No"
+                }
             },
             "todayElectricity": {
                 "name": "Today's Generation"
@@ -52,7 +56,17 @@
                 "name": "Total Battery Discharge"
             },
             "h1Online": {
-                "name": "Device Online"
+                "name": "Device Online",
+                "state": {
+                    "Yes": "Yes",
+                    "No": "No"
+                }
+            },
+            "totalPlantTreeNum": {
+                "name": "Trees Planted"
+            },
+            "totalReduceCo2": {
+                "name": "CO₂ Reduction"
             }
         }
     }

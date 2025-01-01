@@ -98,6 +98,20 @@ H1_SENSORS = {
         "state_class": None,
         "unit": None,
     },
+    "totalPlantTreeNum": {
+        "name": "Trees Planted",
+        "icon": "mdi:tree",
+        "device_class": None,
+        "state_class": "total",
+        "unit": None,
+    },
+    "totalReduceCo2": {
+        "name": "CO₂ Reduction",
+        "icon": "mdi:molecule-co2",
+        "device_class": None,
+        "state_class": "total",
+        "unit": "kg",
+    }
 }
 
 # API endpoints
@@ -106,4 +120,5 @@ ENDPOINTS = {
     "plant_list": "/monitor/site/getUserPlantList",
     "plant_detail": "/monitor/site/getPlantDetailInfo",
     "device_power": "/monitor/site/getStoreOrAcDevicePowerInfo",
+    "plant_chart": "/monitor/site/getPlantDetailChart2"
 }
