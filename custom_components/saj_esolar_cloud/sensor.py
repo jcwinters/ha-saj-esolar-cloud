@@ -146,6 +146,10 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
                 return float(data["chart_data"]["viewBean"]["chargeElec"])
             elif self._sensor_key == "dailyBatteryDischarge":
                 return float(data["chart_data"]["viewBean"]["dischargeElec"])
+            elif self._sensor_key == "dailyTreesPlanted":
+                return float(data["chart_data"]["viewBean"]["plantTreeNum"])
+            elif self._sensor_key == "dailyReduceCo2":
+                return float(data["chart_data"]["viewBean"]["reduceCo2"])
 
             # Battery Info Sensors
             elif self._sensor_key in ["batVoltage", "batTemperature"]:

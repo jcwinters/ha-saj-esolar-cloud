@@ -97,7 +97,7 @@ H1_SENSORS = {
         "icon": "mdi:molecule-co2",
         "device_class": None,
         "state_class": "total",
-        "unit": "kg",
+        "unit": "t",
     },
     "dailyConsumption": {
         "name": "Today Consumption",
@@ -133,6 +133,20 @@ H1_SENSORS = {
         "device_class": "energy",
         "state_class": "total_increasing",
         "unit": "kWh",
+    },
+    "dailyTreesPlanted": {
+        "name": "Today Trees Planted",
+        "icon": "mdi:tree",
+        "device_class": None,
+        "state_class": "total",
+        "unit": None,
+    },
+    "dailyReduceCo2": {
+        "name": "Today CO2 Reduction",
+        "icon": "mdi:molecule-co2",
+        "device_class": None,
+        "state_class": "total",
+        "unit": "kg",
     },
     "lastUploadTime": {
         "name": "Last Update",
