@@ -1,7 +1,7 @@
-"""Constants for the SAJ eSolar integration."""
+"""Constants for the SAJ eSolar Air integration."""
 from typing import Final
 
-DOMAIN: Final = "saj_esolar"
+DOMAIN: Final = "saj_esolar_air"
 MANUFACTURER: Final = "SAJ"
 MODEL: Final = "H1"
 
@@ -13,7 +13,7 @@ UPDATE_INTERVAL: Final = 300  # 5 minutes
 
 # Device info
 DEVICE_INFO = {
-    "identifiers": {("saj_esolar", "h1")},
+    "identifiers": {(DOMAIN, "h1")},
     "name": "SAJ H1 Solar Inverter",
     "manufacturer": MANUFACTURER,
     "model": MODEL,

@@ -1,6 +1,8 @@
 {
-    "name": "SAJ eSolar",
-    "render_readme": false,
-    "domains": ["sensor"]
-  }
-  
+  "name": "SAJ eSolar Air",
+  "content_in_root": false,
+  "render_readme": true,
+  "domains": ["sensor"],
+  "homeassistant": "2024.1.0",
+  "iot_class": "Cloud Polling"
+}
