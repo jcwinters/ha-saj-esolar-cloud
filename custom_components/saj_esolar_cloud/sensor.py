@@ -135,6 +135,18 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
             ]:
                 return float(data["device_power"]["storeDevicePower"][self._sensor_key])
 
+            # Daily Values from Chart Data
+            elif self._sensor_key == "dailyConsumption":
+                return float(data["chart_data"]["viewBean"]["useElec"])
+            elif self._sensor_key == "dailyGridImport":
+                return float(data["chart_data"]["viewBean"]["buyElec"])
+            elif self._sensor_key == "dailyGridExport":
+                return float(data["chart_data"]["viewBean"]["sellElec"])
+            elif self._sensor_key == "dailyBatteryCharge":
+                return float(data["chart_data"]["viewBean"]["chargeElec"])
+            elif self._sensor_key == "dailyBatteryDischarge":
+                return float(data["chart_data"]["viewBean"]["dischargeElec"])
+
             # Battery Info Sensors
             elif self._sensor_key in ["batVoltage", "batTemperature"]:
                 return float(data["battery_info"][self._sensor_key])
