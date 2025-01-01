@@ -1,5 +1,6 @@
 """SAJ eSolar sensor platform."""
 from __future__ import annotations
+from datetime import datetime
 
 from typing import Any, cast
 
@@ -83,6 +84,10 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
             self._attr_native_unit_of_measurement = PERCENTAGE
         elif sensor_config["device_class"] == "timestamp":
             self._attr_device_class = SensorDeviceClass.TIMESTAMP
+        elif sensor_config["device_class"] == "temperature":
+            self._attr_device_class = SensorDeviceClass.TEMPERATURE
+        elif sensor_config["device_class"] == "voltage":
+            self._attr_device_class = SensorDeviceClass.VOLTAGE
         elif sensor_config["unit"]:
             self._attr_native_unit_of_measurement = sensor_config["unit"]
 
@@ -105,13 +110,17 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
                 "nowPower", "todayElectricity", "monthElectricity",
                 "yearElectricity", "totalElectricity", "totalConsumpElec",
                 "totalBuyElec", "totalSellElec", "totalPlantTreeNum",
-                "totalReduceCo2", "lastUploadTime"
+                "totalReduceCo2"
             ]:
-                value = data["plant_details"]["plantDetail"][self._sensor_key]
-                if self._sensor_key == "selfUseRate":
-                    # Remove % symbol and convert to float
-                    return float(value.rstrip("%"))
-                return value
+                return float(data["plant_details"]["plantDetail"][self._sensor_key])
+            elif self._sensor_key == "lastUploadTime":
+                # Parse the timestamp string to datetime object
+                timestamp = data["plant_details"]["plantDetail"]["lastUploadTime"]
+                return datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S").isoformat()
+            elif self._sensor_key == "selfUseRate":
+                # Remove % symbol and convert to float
+                value = data["plant_details"]["plantDetail"]["selfUseRate"]
+                return float(value.rstrip("%"))
 
             # Device Power Sensors
             elif self._sensor_key in [
@@ -120,6 +129,10 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
                 "batCapcity"
             ]:
                 return float(data["device_power"]["storeDevicePower"][self._sensor_key])
+
+            # Battery Info Sensors
+            elif self._sensor_key in ["batVoltage", "batTemperature"]:
+                return float(data["battery_info"][self._sensor_key])
 
             # Direction Sensors
             elif self._sensor_key in [

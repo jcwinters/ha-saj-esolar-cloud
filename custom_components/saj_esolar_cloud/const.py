@@ -164,6 +164,20 @@ H1_SENSORS = {
         "state_class": None,
         "unit": "Ah",
     },
+    "batVoltage": {
+        "name": "Battery Voltage",
+        "icon": "mdi:lightning-bolt",
+        "device_class": "voltage",
+        "state_class": "measurement",
+        "unit": "V",
+    },
+    "batTemperature": {
+        "name": "Battery Temperature",
+        "icon": "mdi:thermometer",
+        "device_class": "temperature",
+        "state_class": "measurement",
+        "unit": "°C",
+    },
     "pvDirection": {
         "name": "PV Direction",
         "icon": "mdi:solar-power",
@@ -214,5 +228,6 @@ ENDPOINTS = {
     "plant_list": "/monitor/site/getUserPlantList",
     "plant_detail": "/monitor/site/getPlantDetailInfo",
     "device_power": "/monitor/site/getStoreOrAcDevicePowerInfo",
-    "plant_chart": "/monitor/site/getPlantDetailChart2"
+    "plant_chart": "/monitor/site/getPlantDetailChart2",
+    "battery_info": "/cloudMonitor/deviceInfo/findBatteryRealTimeList"
 }

@@ -146,12 +146,32 @@ class SAJeSolarDataUpdateCoordinator(DataUpdateCoordinator):
                     raise UpdateFailed(f"Failed to get plant chart data: {resp.status}")
                 chart_data = await resp.json()
 
+            # Get battery real-time information
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:00")
+            battery_data = f"devicesn={device_sn}&timeStr={current_time}"
+
+            async with self.session.post(
+                f"{BASE_URL}{ENDPOINTS['battery_info']}",
+                data=battery_data,
+                headers=headers,
+            ) as resp:
+                if resp.status != 200:
+                    raise UpdateFailed(f"Failed to get battery info: {resp.status}")
+                battery_info = await resp.json()
+
+                # Extract the most recent battery data (first item in the first array)
+                if battery_info.get("result") == "OK" and battery_info.get("list"):
+                    battery_data = battery_info["list"][0][0] if battery_info["list"][0] else {}
+                else:
+                    battery_data = {}
+
             # Combine all data
             data = {
                 "plant_info": plant_info,
                 "plant_details": plant_details,
                 "device_power": device_power,
                 "chart_data": chart_data,
+                "battery_info": battery_data,
             }
 
             # Logout and clear session
