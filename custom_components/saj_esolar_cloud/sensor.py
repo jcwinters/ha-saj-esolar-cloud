@@ -1,7 +1,6 @@
 """SAJ eSolar sensor platform."""
 from __future__ import annotations
 from datetime import datetime
-import zoneinfo
 
 from typing import Any, cast
 
@@ -121,6 +120,7 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
                 # Parse the timestamp string to datetime object with timezone
                 timestamp = data["plant_details"]["plantDetail"]["lastUploadTime"]
                 naive_dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
+                # Return the datetime object directly, not its string representation
                 return dt_util.as_utc(naive_dt)
             elif self._sensor_key == "selfUseRate":
                 # Remove % symbol and convert to float
