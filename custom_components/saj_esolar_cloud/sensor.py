@@ -26,6 +26,23 @@ from homeassistant.helpers.update_coordinator import (
 from .const import DEVICE_INFO, DIRECTION_STATES, DOMAIN, H1_SENSORS
 from .coordinator import SAJeSolarDataUpdateCoordinator
 
+# Device class mapping
+DEVICE_CLASS_MAP = {
+    "power": SensorDeviceClass.POWER,
+    "energy": SensorDeviceClass.ENERGY,
+    "battery": SensorDeviceClass.BATTERY,
+    "timestamp": SensorDeviceClass.TIMESTAMP,
+    "temperature": SensorDeviceClass.TEMPERATURE,
+    "voltage": SensorDeviceClass.VOLTAGE,
+}
+
+# State class mapping
+STATE_CLASS_MAP = {
+    "measurement": SensorStateClass.MEASUREMENT,
+    "total_increasing": SensorStateClass.TOTAL_INCREASING,
+    "total": SensorStateClass.TOTAL,
+}
+
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: ConfigEntry,
@@ -72,32 +89,17 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
         self._attr_icon = sensor_config["icon"]
         self._attr_device_info = DEVICE_INFO
 
-        # Set up sensor properties based on device class
-        if sensor_config["device_class"] == "power":
-            self._attr_device_class = SensorDeviceClass.POWER
-            self._attr_native_unit_of_measurement = UnitOfPower.WATT
-        elif sensor_config["device_class"] == "energy":
-            self._attr_device_class = SensorDeviceClass.ENERGY
-            self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
-        elif sensor_config["device_class"] == "battery":
-            self._attr_device_class = SensorDeviceClass.BATTERY
-            self._attr_native_unit_of_measurement = PERCENTAGE
-        elif sensor_config["device_class"] == "timestamp":
-            self._attr_device_class = SensorDeviceClass.TIMESTAMP
-        elif sensor_config["device_class"] == "temperature":
-            self._attr_device_class = SensorDeviceClass.TEMPERATURE
-        elif sensor_config["device_class"] == "voltage":
-            self._attr_device_class = SensorDeviceClass.VOLTAGE
-        elif sensor_config["unit"]:
-            self._attr_native_unit_of_measurement = sensor_config["unit"]
+        # Set device class from mapping
+        if sensor_config["device_class"]:
+            self._attr_device_class = DEVICE_CLASS_MAP.get(sensor_config["device_class"])
 
-        # Set up state class
-        if sensor_config["state_class"] == "measurement":
-            self._attr_state_class = SensorStateClass.MEASUREMENT
-        elif sensor_config["state_class"] == "total_increasing":
-            self._attr_state_class = SensorStateClass.TOTAL_INCREASING
-        elif sensor_config["state_class"] == "total":
-            self._attr_state_class = SensorStateClass.TOTAL
+        # Set state class from mapping
+        if sensor_config["state_class"]:
+            self._attr_state_class = STATE_CLASS_MAP.get(sensor_config["state_class"])
+
+        # Set unit of measurement
+        if sensor_config["unit"]:
+            self._attr_native_unit_of_measurement = sensor_config["unit"]
 
     @property
     def native_value(self) -> StateType:
