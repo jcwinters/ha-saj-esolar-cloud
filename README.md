@@ -24,7 +24,7 @@ This integration is a complete rewrite focused on H1 inverters with battery stor
 2. Go to "Integrations"
 3. Click the three dots menu in the top right corner
 4. Select "Custom repositories"
-5. Add this repository URL: `https://github.com/elboletaire/saj_esolar_air`
+5. Add this repository URL: `https://github.com/elboletaire/ha-saj-esolar-air`
 6. Select category: "Integration"
 7. Click "Add"
 8. Find "SAJ eSolar Air" in the integrations list and install it
@@ -85,7 +85,7 @@ The integration will automatically discover your H1 inverter and set up all avai
 
 ## Support
 
-For bugs [open an issue on GitHub](https://github.com/elboletaire/saj_esolar_air/issues).
+For bugs [open an issue on GitHub](https://github.com/elboletaire/ha-saj-esolar-air/issues).
 
 Please, abstain from questions and feature requests, since this is a personal project and I don't have the time to provide support for it.
 
