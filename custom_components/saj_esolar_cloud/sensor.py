@@ -129,11 +129,24 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
 
             # Device Power Sensors
             elif self._sensor_key in [
-                "pvPower", "gridPower", "batteryPower", "outPower",
-                "totalLoadPower", "batCurr", "batEnergyPercent",
-                "batCapcity"
+                "pvPower", "outPower", "totalLoadPower", "batCurr",
+                "batEnergyPercent", "batCapcity"
             ]:
                 return float(data["device_power"]["storeDevicePower"][self._sensor_key])
+            elif self._sensor_key == "gridPower":
+                power = float(data["device_power"]["storeDevicePower"]["gridPower"])
+                direction = int(data["device_power"]["storeDevicePower"]["gridDirection"])
+                # Make power negative when exporting (direction = 1)
+                return -power if direction == 1 else power
+            elif self._sensor_key == "gridPowerAbsolute":
+                return float(data["device_power"]["storeDevicePower"]["gridPower"])
+            elif self._sensor_key == "batteryPower":
+                power = float(data["device_power"]["storeDevicePower"]["batteryPower"])
+                direction = int(data["device_power"]["storeDevicePower"]["batteryDirection"])
+                # Make power negative when charging (direction = -1)
+                return -power if direction == -1 else power
+            elif self._sensor_key == "batteryPowerAbsolute":
+                return float(data["device_power"]["storeDevicePower"]["batteryPower"])
 
             # Daily Values from Chart Data
             elif self._sensor_key == "dailyConsumption":
