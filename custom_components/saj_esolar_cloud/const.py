@@ -287,6 +287,13 @@ DIRECTION_STATES = {
     1: "Exporting"
 }
 
+# Battery states mapping
+BATTERY_STATES = {
+    -1: "Charging",
+    0: "Idle",
+    1: "Discharging"
+}
+
 # API endpoints
 ENDPOINTS = {
     "login": "/login",

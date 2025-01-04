@@ -24,7 +24,7 @@ from homeassistant.helpers.update_coordinator import (
 )
 from homeassistant.util import dt as dt_util
 
-from .const import DEVICE_INFO, DIRECTION_STATES, DOMAIN, H1_SENSORS
+from .const import DEVICE_INFO, DIRECTION_STATES, BATTERY_STATES, DOMAIN, H1_SENSORS
 from .coordinator import SAJeSolarDataUpdateCoordinator
 
 # Device class mapping
@@ -169,12 +169,12 @@ class SAJeSolarSensor(CoordinatorEntity[SAJeSolarDataUpdateCoordinator], SensorE
                 return float(data["battery_info"][self._sensor_key])
 
             # Direction Sensors
-            elif self._sensor_key in [
-                "pvDirection", "gridDirection", "batteryDirection",
-                "outPutDirection"
-            ]:
+            elif self._sensor_key in ["pvDirection", "gridDirection", "outPutDirection"]:
                 value = int(data["device_power"]["storeDevicePower"][self._sensor_key])
                 return DIRECTION_STATES.get(value, f"Unknown ({value})")
+            elif self._sensor_key == "batteryDirection":
+                value = int(data["device_power"]["storeDevicePower"][self._sensor_key])
+                return BATTERY_STATES.get(value, f"Unknown ({value})")
 
             # Online Status
             elif self._sensor_key == "isOnline":
