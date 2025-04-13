@@ -24,7 +24,7 @@ This integration is a complete rewrite focused on H1 inverters with battery stor
 2. Go to "Integrations"
 3. Click the three dots menu in the top right corner
 4. Select "Custom repositories"
-5. Add this repository URL: `https://github.com/elboletaire/ha-saj-esolar-cloud`
+5. Add this repository URL: `https://github.com/jcwinters/ha-saj-esolar-cloud`
 6. Select category: "Integration"
 7. Click "Add"
 8. Find "SAJ eSolar Cloud" in the integrations list and install it
