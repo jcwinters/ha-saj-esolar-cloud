@@ -6,7 +6,12 @@ MANUFACTURER: Final = "SAJ"
 MODEL: Final = "H1"
 
 # Base URL for the SAJ eSolar API
-BASE_URL: Final = "https://fop.saj-electric.com/saj"
+# China portal
+# BASE_URL: Final = "https://op.saj-electric.com/saj"
+# European Portal
+# BASE_URL: Final = "https://fop.saj-electric.com/saj"
+# International Portal
+BASE_URL: Final = "https://intoop.saj-electric.com/saj"
 
 # Update interval
 UPDATE_INTERVAL: Final = 300  # 5 minutes
