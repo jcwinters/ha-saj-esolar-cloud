@@ -11,7 +11,7 @@ MODEL: Final = "H1"
 # European Portal
 # BASE_URL: Final = "https://fop.saj-electric.com/saj"
 # International Portal
-BASE_URL: Final = "https://intoop.saj-electric.com/saj"
+BASE_URL: Final = "https://intop.saj-electric.com/saj"
 
 # Update interval
 UPDATE_INTERVAL: Final = 300  # 5 minutes
