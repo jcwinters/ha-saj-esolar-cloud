@@ -9,9 +9,9 @@ MODEL: Final = "H1"
 # China portal
 # BASE_URL: Final = "https://op.saj-electric.com/saj"
 # European Portal
-# BASE_URL: Final = "https://fop.saj-electric.com/saj"
+# BASE_URL: Final = "https://eop.saj-electric.com/saj"
 # International Portal
-BASE_URL: Final = "https://intop.saj-electric.com/saj"
+BASE_URL: Final = "https://iop.saj-electric.com/saj"
 
 # Update interval
 UPDATE_INTERVAL: Final = 300  # 5 minutes
